@@ -40,7 +40,7 @@ Variable | Description | Example
 `CLICKHOUSE_TABLE` | Clickhouse table. Will be created if not exists. Default value is 'sflowstat'.|  sflowstat
 `CLICKHOUSE_USER` | Username to use with  Clickhouse. | **pmlab**
 `CLICKHOUSE_PASSWORD` | Password for Clickhouse user.| **mypassword**
-`CLICKHOUSE_DATA_SCHEMA` | Fileds type mapping. Comma speated values filed:type.|**mac_src:String,ip_src:IPv4,ip_dst:IPv4,peer_ip_src:IPv4,port_src:UInt16,port_dst:UInt32,ip_proto:String,stamp_updated:DateTime,packets:UInt64,bytes:UInt64** 
+`CLICKHOUSE_DATA_SCHEMA` | Fileds type mapping. Comma separated values field:type.|**mac_src:String,ip_src:IPv4,ip_dst:IPv4,peer_ip_src:IPv4,port_src:UInt16,port_dst:UInt32,ip_proto:String,stamp_updated:DateTime,packets:UInt64,bytes:UInt64** 
 `CLICKHOUSE_CREATE_TABLE` | If 'YES' then script will try to create table. Default values is 'YES'.| YES
 `CLICKHOUSE_ORDER_BY` | Fileds to use in sort key. Effective only if script creates table. Default value is ''.| stamp_updated,peer_ip_src
 `CLICKHOUSE_PARTITION_BY` | Partititioning key. Effective only if script creates table. Default value is ''.| toYYYYMMDD(stamp_updated)
