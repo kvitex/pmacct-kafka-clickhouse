@@ -1,0 +1,5 @@
+prometheus_client
+kafka
+clickhouse-driver
+python-dotenv
+pytz
