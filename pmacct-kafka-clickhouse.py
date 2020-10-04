@@ -73,7 +73,7 @@ def main():
     samples_timer = int(datetime.now().timestamp())
     samples_max_count = 0
     insert_sql  = f'INSERT INTO {clickhouse_db}.{clickhouse_table} ({ ",".join(fields.keys()) }) VALUES'
-    print(insert_sql)
+    # print(insert_sql)
     for message in consumer:
         db_rows.append({k: message.value.get(k, def_by_type(fields[k])) if re.search('Date', fields[k]) is None 
                            else datetime.strptime(message.value[k], timestmap_template).replace(tzinfo=pytz.utc)
@@ -82,7 +82,7 @@ def main():
         samples_counter.inc()
         samples_max_count += 1
         if (samples_max_count > clickhouse_max_samples_per_send) or ((int(datetime.now().timestamp()) - samples_timer) > clickhouse_max_time_to_send):
-            print(db_rows)
+            # print(db_rows)
             r = client.execute(insert_sql, db_rows)
             print(f'{nowstamp()} Sent {samples_max_count} samples')
             samples_timer = int(datetime.now().timestamp())
