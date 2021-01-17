@@ -27,7 +27,7 @@ clickhouse_partition_by          = os.environ.get('CLICKHOUSE_PARTITION_BY','')
 clickhouse_max_samples_per_send  = int(os.environ.get('CLICKHOUSE_MAX_SAMPLES_PER_SEND','1000'))
 clickhouse_max_time_to_send      = int(os.environ.get('CLICKHOUSE_MAX_TIME_TO_SEND','10'))
 prometheus_client_port           = int(os.environ.get('PROMETHEUS_CLIENT_PORT','9003'))
-timestmap_template               = os.environ.get('TIMESTAMP_TEMPLATE', '%Y-%m-%d %H:%M:%S')
+timestamp_template               = os.environ.get('TIMESTAMP_TEMPLATE', '%Y-%m-%d %H:%M:%S')
 
 
 def nowstamp():
@@ -76,7 +76,7 @@ def main():
     # print(insert_sql)
     for message in consumer:
         db_rows.append({k: message.value.get(k, def_by_type(fields[k])) if re.search('Date', fields[k]) is None 
-                           else datetime.strptime(message.value[k], timestmap_template).replace(tzinfo=pytz.utc)
+                           else datetime.strptime(message.value[k], timestamp_template).replace(tzinfo=pytz.utc)
                            for k in fields 
                         })
         samples_counter.inc()
